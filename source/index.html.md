@@ -1,15 +1,12 @@
 ---
-title: API Reference
+title: BAM LeadTracker JSON API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
   - shell
-  - ruby
-  - python
-  - javascript
+  - php
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
+  - <a href='https://bamlt.com'>Sign Up for an API Key</a>
 
 includes:
   - errors
@@ -21,221 +18,71 @@ code_clipboard: true
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the BAM LeadTracker JSON API! You can use our API to submit new leads to the BAM LeadTracker.
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
-
-This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
+You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
 # Authentication
 
-> To authorize, use this code:
+We use basic authentication for all requests.
 
-```ruby
-require 'kittn'
+The username should be "api" and the password is your API key.
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
+# Leads
 
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
+## Create a new Lead
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here" \
-  -H "Authorization: meowmeowmeow"
+curl -u api:your-api-key \
+  -d '{"name":"John Doe","phone":"555 123 4567","email":"test@acme.com","postalCode":"12345"}' \
+  -H "Content-Type: application/json" \ 
+  http://bamlt.test/api/lead
 ```
 
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
+```php
+$ch = curl_init('https://bamlt.com/api/lead');
+curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+  'Accept: application/json',
+  'Content-Type: application/json',
+  'Authorization: Basic abcdefg12345678123456789',
+));
+curl_setopt($ch, CURLOPT_POST, 1);
+curl_setopt($ch, CURLOPT_POSTFIELDS, '{"name":"John Doe","phone":"555 123 4567","email":"test@acme.com","postalCode":"12345"}');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+curl_exec($ch);
+curl_close($ch);
 ```
 
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
+> The above command returns JSON structured like this containing the uuid of the new lead:
 
 ```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
+{
+  "uuid": "abcdefg-1234-12345-1231-1231-xyz123"
+}
 ```
 
-This endpoint retrieves all kittens.
+This endpoint creates a new lead.
 
 ### HTTP Request
 
-`GET http://example.com/api/kittens`
+`POST https://bamlt.com/api/lead`
 
 ### Query Parameters
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+Parameter | Required | Type | Description
+--------- | -------- | ---- | -----------
+namePrefix | no | string | 
+<b>name</b> | <b>yes*</b> | string | 
+firstName | no* | string | 
+lastName | no* | string | 
+address | no | string | 
+address2 | no | string | 
+city | no | string | 
+state | no | string | 
+<b>postalCode</b> | <b>yes</b> | string | 
+country | no | string | 2-character ISO country code
+email | no | string | 
+<b>phone</b> | <b>yes</b> | string | 
+comments | no | string | 
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
-}
-```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2" \
-  -X DELETE \
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
-
+*Either the "name" OR the "firstName" AND "firstName" parameters are required.
