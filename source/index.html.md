@@ -84,5 +84,12 @@ country | no | string | 2-character ISO country code
 email | no | string | 
 <b>phone</b> | <b>yes</b> | string | 
 comments | no | string | 
+businessName | no | string | 
+businessAddress | no | string | 
+businessAddress2 | no | string | 
+businessCity | no | string | 
+businessState | no | string | 
+businessPostalCode | no | string | 
+businessCountry | no | string | 2-character ISO country code
 
 *Either the "name" OR the "firstName" AND "firstName" parameters are required.
