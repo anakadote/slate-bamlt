@@ -8,6 +8,7 @@ Error Code | Meaning
 401 | Unauthorized -- Your API key is wrong.
 405 | Method Not Allowed -- You tried to access the API with an invalid method.
 406 | Not Acceptable -- You requested a format that isn't valid json.
+422 | Validation Errors -- The submitted data failed validation.
 429 | Too Many Requests -- You're submitting too many requests! Slow down!
 500 | Internal Server Error -- We had a problem with our server. Try again later.
 503 | Service Unavailable -- We're temporarily offline for maintenance. Please try again later.

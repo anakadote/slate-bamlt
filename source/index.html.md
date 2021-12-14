@@ -53,7 +53,7 @@ curl_exec($ch);
 curl_close($ch);
 ```
 
-> The above command returns JSON structured like this containing the uuid of the new lead:
+> The above command returns a JSON 201 HTTP response, which includes the uuid of the new lead:
 
 ```json
 {
@@ -84,6 +84,9 @@ country | no | string | 2-character ISO country code
 email | no | string | 
 <b>phone</b> | <b>yes</b> | string | 
 comments | no | string | 
+leadSource | no | string | 
+mediaType | no | string | 
+httpReferrer | no | string | The referring/source URL
 businessName | no | string | 
 businessAddress | no | string | 
 businessAddress2 | no | string | 
