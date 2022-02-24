@@ -71,7 +71,7 @@ This endpoint creates a new lead.
 
 Parameter | Required | Type | Description
 --------- | -------- | ---- | -----------
-distributionMethod | no | string | The default value is “store”. You can set this to “client” to automatically distribute the lead to one of your stores by matching the submitted postal code to a postal code assigned to one of your stores.
+distributionMethod | no | string | The default value is “store”. You can set this to “client” to automatically distribute the lead to one of your stores by matching the submitted postal code to a postal code assigned to one of your stores. If no postal code match is found, then the lead will be given to your default store.
 namePrefix | no | string | 
 <b>name</b> | <b>yes*</b> | string | 
 firstName | no* | string | 
