@@ -6,7 +6,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - php
 
 toc_footers:
-  - <a href='https://bamlt.com'>Sign Up for an API Key</a>
+  - <a href='https://bamadv.com/contact-us/'>Contact us for an API Key</a>
 
 includes:
   - errors
@@ -26,7 +26,7 @@ You can view code examples in the dark area to the right, and you can switch the
 
 We use basic authentication for all requests.
 
-The username should be "api" and the password is your API key.
+The username should be “api” and the password is your API key.
 
 # Leads
 
@@ -41,11 +41,11 @@ curl -u api:your-api-key \
 
 ```php
 $ch = curl_init('https://bamlt.com/api/lead');
-curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
   'Accept: application/json',
   'Content-Type: application/json',
   'Authorization: Basic abcdefg12345678123456789',
-));
+]);
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, '{"name":"John Doe","phone":"555 123 4567","email":"test@acme.com","postalCode":"12345"}');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
@@ -71,6 +71,7 @@ This endpoint creates a new lead.
 
 Parameter | Required | Type | Description
 --------- | -------- | ---- | -----------
+distributionMethod | no | string | The default value is “store”. You can set this to “client” to automatically distribute the lead to one of your stores by matching the submitted postal code to a postal code assigned to one of your stores.
 namePrefix | no | string | 
 <b>name</b> | <b>yes*</b> | string | 
 firstName | no* | string | 
@@ -95,4 +96,4 @@ businessState | no | string |
 businessPostalCode | no | string | 
 businessCountry | no | string | 2-character ISO country code
 
-*Either the "name" OR the "firstName" AND "firstName" parameters are required.
+*Either the “name” OR the “firstName” AND “firstName” parameters are required.
