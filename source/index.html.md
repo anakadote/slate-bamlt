@@ -24,27 +24,28 @@ You can view code examples in the dark area to the right, and you can switch the
 
 # Authentication
 
-We use basic authentication for all requests.
+We use bearer authentication for all requests. Your **API Key** should be sent in the `Authorization` header using the `Bearer` keyword:
 
-The username should be “api” and the password is your API key.
+`Authorization: Bearer abcdefg12345678123456789`
 
 # Leads
 
 ## Create a new Lead
 
 ```shell
-curl -u api:your-api-key \
-  -d '{"name":"John Doe","phone":"555 123 4567","email":"test@acme.com","postalCode":"12345"}' \
-  -H "Content-Type: application/json" \ 
-  http://bamlt.test/api/lead
+curl -d '{"name":"John Doe","phone":"555 123 4567","email":"test@acme.com","postalCode":"12345"}' \
+     -H "Authorization: Bearer abcdefg12345678123456789" \
+     -H "Accept: application/json" \
+     -H "Content-Type: application/json" \
+     https://bamlt.com/api/lead
 ```
 
 ```php
 $ch = curl_init('https://bamlt.com/api/lead');
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
+  'Authorization: Bearer abcdefg12345678123456789',
   'Accept: application/json',
   'Content-Type: application/json',
-  'Authorization: Basic abcdefg12345678123456789',
 ]);
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, '{"name":"John Doe","phone":"555 123 4567","email":"test@acme.com","postalCode":"12345"}');
