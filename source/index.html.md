@@ -87,6 +87,7 @@ email | no | string |
 <b>phone</b> | <b>yes</b> | string | 
 comments | no | string | 
 leadSource | no | string | 
+leadGenerator | no | string | 
 mediaType | no | string | 
 httpReferrer | no | string | The referring/source URL
 businessName | no | string | 
