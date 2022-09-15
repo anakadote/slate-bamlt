@@ -97,5 +97,11 @@ businessCity | no | string |
 businessState | no | string | 
 businessPostalCode | no | string | 
 businessCountry | no | string | 2-character ISO country code
+vendorLeadId | no | string | 
+vendorProduct | no | string | 
+vendorScheduleDate | no | string | 
+vendorScheduleTime | no | string | 
+vendorServiceRequestReason | no | string | 
+vendorTrackingNumber | no | string | 
 
-*Either the “name” OR the “firstName” AND “firstName” parameters are required.
+*Either the “name” OR the “firstName” AND “lastName” parameters are required.
