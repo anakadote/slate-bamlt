@@ -86,6 +86,7 @@ country | no | string | 2-character ISO country code
 email | no | string | 
 <b>phone</b> | <b>yes</b> | string | 
 comments | no | string | 
+interest | no | string | 
 leadSource | no | string | 
 leadGenerator | no | string | 
 mediaType | no | string | 
