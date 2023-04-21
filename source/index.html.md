@@ -98,6 +98,7 @@ businessCity | no | string |
 businessState | no | string | 
 businessPostalCode | no | string | 
 businessCountry | no | string | 2-character ISO country code
+disposition | no | string | Set to "closed" to immediately close the lead
 vendorLeadId | no | string | 
 vendorProduct | no | string | 
 vendorScheduleDate | no | string | 
