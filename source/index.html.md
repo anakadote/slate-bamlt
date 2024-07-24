@@ -91,6 +91,9 @@ leadSource | no | string |
 leadGenerator | no | string | 
 mediaType | no | string | 
 httpReferrer | no | string | The referring/source URL
+assignTo | no | string | The email address of a user to be auto-assigned to the lead
+customerType | no | string | Ex: "Contractor" or "Designer"
+disposition | no | string | Set to "closed" to immediately close the lead
 businessName | no | string | 
 businessAddress | no | string | 
 businessAddress2 | no | string | 
@@ -98,7 +101,6 @@ businessCity | no | string |
 businessState | no | string | 
 businessPostalCode | no | string | 
 businessCountry | no | string | 2-character ISO country code
-disposition | no | string | Set to "closed" to immediately close the lead
 smsConsent | no | boolean | 
 vendorLeadId | no | string | 
 vendorProduct | no | string | 
