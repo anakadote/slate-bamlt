@@ -89,6 +89,7 @@ comments | no | string |
 interest | no | string | 
 leadSource | no | string | 
 leadGenerator | no | string | 
+leadType | no | string | 
 mediaType | no | string | 
 httpReferrer | no | string | The referring/source URL
 assignTo | no | string | The email address of a user to be auto-assigned to the lead
