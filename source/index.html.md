@@ -109,7 +109,7 @@ vendorScheduleDate | no | string |
 vendorScheduleTime | no | string | 
 vendorServiceRequestReason | no | string | 
 vendorTrackingNumber | no | string | 
-appointment | no | object
+appointment | no | object | This is an opt-in parameter. Please contact BAM to enable.
 <b>appointment.dateTime</b> | <b>yes, with appointment</b> | string | The appointment's date and time in ISO 8601 format. Ex: 2025-02-05T05:54:56Z
 
 *Either the “name” OR the “firstName” AND “lastName” parameters are required.
