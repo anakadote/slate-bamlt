@@ -109,6 +109,14 @@ vendorScheduleDate | no | string |
 vendorScheduleTime | no | string | 
 vendorServiceRequestReason | no | string | 
 vendorTrackingNumber | no | string | 
+utm | no | object | 
+utm.gclid | no | string | 
+utm.utm_source | no | string | 
+utm.utm_medium | no | string | 
+utm.utm_term | no | string | 
+utm.utm_campaign | no | string | 
+utm.utm_content | no | string | 
+utm.utm_keyword | no | string | 
 appointment | no | object | This is an opt-in parameter. Please contact BAM to enable.
 <b>appointment.dateTime</b> | <b>yes, with appointment</b> | string | The appointment's date and time in ISO 8601 format. Ex: 2025-02-05T05:54:56Z
 
