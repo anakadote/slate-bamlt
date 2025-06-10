@@ -82,6 +82,7 @@ address2 | no | string |
 city | no | string | 
 state | no | string | 
 <b>postalCode</b> | <b>yes</b> | string | 
+county | no | string | 
 country | no | string | 2-character ISO country code
 email | no | string | 
 <b>phone</b> | <b>yes</b> | string | 
