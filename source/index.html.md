@@ -88,6 +88,7 @@ email | no | string |
 <b>phone</b> | <b>yes</b> | string | 
 comments | no | string | 
 interest | no | string | 
+productInterest | no | string | e.g. "Water Softeners"
 leadSource | no | string | 
 leadGenerator | no | string | 
 leadType | no | string | 
