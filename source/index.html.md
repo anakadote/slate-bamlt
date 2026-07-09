@@ -94,6 +94,8 @@ leadGenerator | no | string |
 leadType | no | string | 
 mediaType | no | string | 
 httpReferrer | no | string | The referring/source URL
+ipAddress | no | string | The submitter's IP address
+userAgent | no | string | The submitter's user agent
 assignTo | no | string | The email address of a user to be auto-assigned to the lead
 customerType | no | string | Ex: "Contractor" or "Designer"
 disposition | no | string | Set to "closed" to immediately close the lead
