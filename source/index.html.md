@@ -204,6 +204,8 @@ Parameter | Required | Type | Description
 --------- | -------- | ---- | -----------
 page | no | integer | The page of results to return. Defaults to 1. Use `meta.lastPage` or `links.next` to page through results.
 perPage | no | integer | The number of results per page. Defaults to 250. Maximum 250.
+dateStart | no | string | Return leads created on or after this date (`YYYY-MM-DD`, e.g. `2026-01-01`). Dates are in UTC.
+dateEnd | no | string | Return leads created on or before this date (`YYYY-MM-DD`, e.g. `2026-12-31`). Dates are in UTC.
 phone | no | string | Filter leads by a phone number in E.164 format (e.g. `+14125551212`).
 
 # Appointments
@@ -287,4 +289,6 @@ Parameter | Required | Type | Description
 --------- | -------- | ---- | -----------
 page | no | integer | The page of results to return. Defaults to 1. Use `meta.lastPage` or `links.next` to page through results.
 perPage | no | integer | The number of results per page. Defaults to 250. Maximum 250.
+dateStart | no | string | Return appointments scheduled on or after this date (`YYYY-MM-DD`, e.g. `2026-01-01`). Dates are in UTC.
+dateEnd | no | string | Return appointments scheduled on or before this date (`YYYY-MM-DD`, e.g. `2026-12-31`). Dates are in UTC.
 phone | no | string | Filter appointments by a phone number in E.164 format (e.g. `+14125551212`).
