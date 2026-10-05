@@ -18,9 +18,7 @@ code_clipboard: true
 
 # Introduction
 
-Welcome to the BAM LeadTracker JSON API! You can use our API to submit new leads to the BAM LeadTracker.
-
-You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+Welcome to the BAM LeadTracker JSON API. Requests are throttled at 60 per minute.
 
 # Authentication
 
@@ -30,18 +28,18 @@ We use bearer authentication for all requests. Your **API Key** should be sent i
 
 # Leads
 
-## Create a new Lead
+## Create a New Lead
 
 ```shell
 curl -d '{"name":"John Doe","phone":"555 123 4567","email":"test@acme.com","postalCode":"12345"}' \
      -H "Authorization: Bearer abcdefg12345678123456789" \
      -H "Accept: application/json" \
      -H "Content-Type: application/json" \
-     https://bamlt.com/api/lead
+     https://bamlt.com/api/leads
 ```
 
 ```php
-$ch = curl_init('https://bamlt.com/api/lead');
+$ch = curl_init('https://bamlt.com/api/leads');
 curl_setopt($ch, CURLOPT_HTTPHEADER, [
   'Authorization: Bearer abcdefg12345678123456789',
   'Accept: application/json',
@@ -51,14 +49,13 @@ curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, '{"name":"John Doe","phone":"555 123 4567","email":"test@acme.com","postalCode":"12345"}');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_exec($ch);
-curl_close($ch);
 ```
 
-> The above command returns a JSON 201 HTTP response, which includes the uuid of the new lead:
+> The above command returns a JSON 201 HTTP response, which includes the UUID of the new lead:
 
 ```json
 {
-  "uuid": "abcdefg-1234-12345-1231-1231-xyz123"
+  "uuid": "abcdefgh-4b83-4a7b-9292-1f7ca3e0f4a4"
 }
 ```
 
@@ -66,13 +63,13 @@ This endpoint creates a new lead.
 
 ### HTTP Request
 
-`POST https://bamlt.com/api/lead`
+`POST https://bamlt.com/api/leads`
 
-### Query Parameters
+### Request Body
 
 Parameter | Required | Type | Description
 --------- | -------- | ---- | -----------
-distributionMethod | no | string | The default value is “store”. You can set this to “client” to automatically distribute the lead to one of your stores by matching the submitted postal code to a postal code assigned to one of your stores. If no postal code match is found, then the lead will be given to your default store.
+distributionMethod | no | string | The default value is `store`. You can set this to `client` to automatically distribute the lead to one of your stores by matching the submitted postal code to a postal code assigned to one of your stores. If no postal code match is found, then the lead will be given to your default store.
 namePrefix | no | string | 
 <b>name</b> | <b>yes*</b> | string | 
 firstName | no* | string | 
@@ -83,29 +80,29 @@ city | no | string |
 state | no | string | 
 <b>postalCode</b> | <b>yes</b> | string | 
 county | no | string | 
-country | no | string | 2-character ISO country code
+country | no | string | 2-character ISO country code.
 email | no | string | 
-<b>phone</b> | <b>yes</b> | string | 
+<b>phone</b> | <b>yes</b> | string | Phone numbers are normalized to digits.
 comments | no | string | 
 interest | no | string | 
-productInterest | no | string | e.g. "Water Softeners"
+productInterest | no | string | e.g. “Water Softeners”.
 leadSource | no | string | 
 leadGenerator | no | string | 
 leadType | no | string | 
 mediaType | no | string | 
-httpReferrer | no | string | The referring/source URL
-ipAddress | no | string | The submitter's IP address
-userAgent | no | string | The submitter's user agent
-assignTo | no | string | The email address of a user to be auto-assigned to the lead
-customerType | no | string | Ex: "Contractor" or "Designer"
-disposition | no | string | Set to "closed" to immediately close the lead
+httpReferrer | no | string | The referring/source URL.
+ipAddress | no | string | The submitter’s IP address.
+userAgent | no | string | The submitter’s user agent.
+assignTo | no | string | The email address of a user to be auto-assigned to the lead.
+customerType | no | string | e.g. “Contractor” or “Designer”.
+disposition | no | string | Set to `closed` to immediately close the lead.
 businessName | no | string | 
 businessAddress | no | string | 
 businessAddress2 | no | string | 
 businessCity | no | string | 
 businessState | no | string | 
 businessPostalCode | no | string | 
-businessCountry | no | string | 2-character ISO country code
+businessCountry | no | string | 2-character ISO country code.
 smsConsent | no | boolean | 
 vendorLeadId | no | string | 
 vendorProduct | no | string | 
@@ -122,6 +119,172 @@ utm.utm_campaign | no | string |
 utm.utm_content | no | string | 
 utm.utm_keyword | no | string | 
 appointment | no | object | This is an opt-in parameter. Please contact BAM to enable.
-<b>appointment.dateTime</b> | <b>yes, with appointment</b> | string | The appointment's date and time in ISO 8601 format. Ex: 2025-02-05T05:54:56Z
+<b>appointment.datetime</b> | <b>yes, with appointment</b> | string | The appointment’s date and time in ISO 8601 format (e.g. 2025-02-05T05:54:56Z).
 
-*Either the “name” OR the “firstName” AND “lastName” parameters are required.
+*Either the `name` OR the `firstName` AND `lastName` parameters are required.
+
+## Retrieve Leads
+
+```shell
+curl -H "Authorization: Bearer abcdefg12345678123456789" \
+     -H "Accept: application/json" \
+     https://bamlt.com/api/leads
+```
+
+```php
+$ch = curl_init('https://bamlt.com/api/leads');
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+  'Authorization: Bearer abcdefg12345678123456789',
+  'Accept: application/json',
+]);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+$response = curl_exec($ch);
+```
+
+> The above command returns a JSON 200 HTTP response:
+
+```json
+{
+  "data": [
+    {
+      "uuid": "abcdefgh-4b83-4a7b-9292-1f7ca3e0f4a4",
+      "firstName": "Sample",
+      "lastName": "Lead",
+      "accountNumber": null,
+      "email": "sample@email.com",
+      "phone": "4125551212",
+      "address": null,
+      "address2": null,
+      "city": null,
+      "state": null,
+      "postalCode": "15212",
+      "assignee": {
+        "firstName": "Sample",
+        "lastName": "Assignee",
+        "email": "sample@email.com"
+      },
+      "status": "Pending",
+      "createdAt": "2026-09-25T14:32:43.000000Z",
+      "appointments": [
+        {
+          "uuid": "stuvwxyz-4b83-4a7b-9292-1f7ca3e0f4a4",
+          "datetime": "2026-09-28T18:00:00.000000Z",
+          "duration": 90,
+          "status": "Pending"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "currentPage": 1,
+    "from": 1,
+    "lastPage": 1,
+    "perPage": 250,
+    "to": 1,
+    "total": 1
+  },
+  "links": {
+    "first": "https://bamlt.com/api/leads?page=1",
+    "last": "https://bamlt.com/api/leads?page=1",
+    "next": null,
+    "prev": null
+  }
+}
+```
+
+This endpoint retrieves a paginated listing of leads along with their associated appointments.
+
+### HTTP Request
+
+`GET https://bamlt.com/api/leads`
+
+### Query Parameters
+
+Parameter | Required | Type | Description
+--------- | -------- | ---- | -----------
+page | no | integer | The page of results to return. Defaults to 1. Use `meta.lastPage` or `links.next` to page through results.
+perPage | no | integer | The number of results per page. Defaults to 250. Maximum 250.
+phone | no | string | Filter leads by a phone number in E.164 format (e.g. `+14125551212`).
+
+# Appointments
+
+## Retrieve Appointments
+
+```shell
+curl -H "Authorization: Bearer abcdefg12345678123456789" \
+     -H "Accept: application/json" \
+     https://bamlt.com/api/appointments
+```
+
+```php
+$ch = curl_init('https://bamlt.com/api/appointments');
+curl_setopt($ch, CURLOPT_HTTPHEADER, [
+  'Authorization: Bearer abcdefg12345678123456789',
+  'Accept: application/json',
+]);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+$response = curl_exec($ch);
+```
+
+> The above command returns a JSON 200 HTTP response:
+
+```json
+{
+  "data": [
+    {
+      "uuid": "stuvwxyz-4b83-4a7b-9292-1f7ca3e0f4a4",
+      "datetime": "2026-09-28T18:00:00.000000Z",
+      "duration": 90,
+      "status": "Pending",
+      "lead": {
+        "uuid": "abcdefgh-4b83-4a7b-9292-1f7ca3e0f4a4",
+        "firstName": "Sample",
+        "lastName": "Lead",
+        "accountNumber": null,
+        "email": "sample@email.com",
+        "phone": "4125551212",
+        "address": null,
+        "address2": null,
+        "city": null,
+        "state": null,
+        "postalCode": "15212",
+        "assignee": {
+          "firstName": "Sample",
+          "lastName": "Assignee",
+          "email": "sample@email.com"
+        },
+        "status": "Pending",
+        "createdAt": "2026-09-25T14:32:43.000000Z"
+      }
+    }
+  ],
+  "meta": {
+    "currentPage": 1,
+    "from": 1,
+    "lastPage": 1,
+    "perPage": 250,
+    "to": 1,
+    "total": 1
+  },
+  "links": {
+    "first": "https://bamlt.com/api/appointments?page=1",
+    "last": "https://bamlt.com/api/appointments?page=1",
+    "next": null,
+    "prev": null
+  }
+}
+```
+
+This endpoint retrieves a paginated listing of appointments along with their associated lead.
+
+### HTTP Request
+
+`GET https://bamlt.com/api/appointments`
+
+### Query Parameters
+
+Parameter | Required | Type | Description
+--------- | -------- | ---- | -----------
+page | no | integer | The page of results to return. Defaults to 1. Use `meta.lastPage` or `links.next` to page through results.
+perPage | no | integer | The number of results per page. Defaults to 250. Maximum 250.
+phone | no | string | Filter appointments by a phone number in E.164 format (e.g. `+14125551212`).

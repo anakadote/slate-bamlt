@@ -7,7 +7,7 @@ Error Code | Meaning
 400 | Bad Request -- Your request is invalid.
 401 | Unauthorized -- Your API key is wrong.
 405 | Method Not Allowed -- You tried to access the API with an invalid method.
-406 | Not Acceptable -- You requested a format that isn't valid json.
+406 | Not Acceptable -- Requests must accept JSON (Accept: application/json).
 422 | Validation Errors -- The submitted data failed validation.
 429 | Too Many Requests -- You're submitting too many requests! Slow down!
 500 | Internal Server Error -- We had a problem with our server. Try again later.
