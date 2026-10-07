@@ -152,7 +152,7 @@ $response = curl_exec($ch);
       "lastName": "Lead",
       "accountNumber": null,
       "email": "sample@email.com",
-      "phone": "4125551212",
+      "phone": "+14125551212",
       "address": null,
       "address2": null,
       "city": null,
@@ -165,12 +165,15 @@ $response = curl_exec($ch);
       },
       "status": "Pending",
       "createdAt": "2026-09-25T14:32:43.000000Z",
+      "updatedAt": "2026-09-25T14:32:43.000000Z",
       "appointments": [
         {
           "uuid": "stuvwxyz-4b83-4a7b-9292-1f7ca3e0f4a4",
           "datetime": "2026-09-28T18:00:00.000000Z",
           "duration": 90,
-          "status": "Pending"
+          "status": "Pending",
+          "createdAt": "2026-09-26T15:05:30.000000Z",
+          "updatedAt": "2026-09-26T15:05:30.000000Z"
         }
       ]
     }
@@ -205,8 +208,12 @@ Parameter | Required | Type | Description
 page | no | integer | The page of results to return. Defaults to 1. Use `meta.lastPage` or `links.next` to page through results.
 perPage | no | integer | The number of results per page. Defaults to 250. Maximum 250.
 dateStart | no | string | Return leads created on or after this date (`YYYY-MM-DD`, e.g. `2026-01-01`). Dates are in UTC.
-dateEnd | no | string | Return leads created on or before this date (`YYYY-MM-DD`, e.g. `2026-12-31`). Dates are in UTC.
+dateEnd | no | string | Return leads created on or before this date (`YYYY-MM-DD`, e.g. `2026-12-31`). Must not be earlier than dateStart. Dates are in UTC.
+updatedStart | no | string | Return leads last updated at or after this time. An ISO 8601 timestamp with a timezone (e.g. `2026-01-01T00:00:00Z` or `2026-01-01T07:00:00-05:00`).
+updatedEnd | no | string | Return leads last updated at or before this time. Same format as `updatedStart`, and must not be earlier than it.
 phone | no | string | Filter leads by a phone number in E.164 format (e.g. `+14125551212`).
+
+A lead's `updatedAt` changes only when the lead itself is updated. Changes to its appointments are not included; use the appointments endpoint's `updatedStart` to find those.
 
 # Appointments
 
@@ -238,13 +245,15 @@ $response = curl_exec($ch);
       "datetime": "2026-09-28T18:00:00.000000Z",
       "duration": 90,
       "status": "Pending",
+      "createdAt": "2026-09-26T15:05:30.000000Z",
+      "updatedAt": "2026-09-26T15:05:30.000000Z",
       "lead": {
         "uuid": "abcdefgh-4b83-4a7b-9292-1f7ca3e0f4a4",
         "firstName": "Sample",
         "lastName": "Lead",
         "accountNumber": null,
         "email": "sample@email.com",
-        "phone": "4125551212",
+        "phone": "+14125551212",
         "address": null,
         "address2": null,
         "city": null,
@@ -256,7 +265,8 @@ $response = curl_exec($ch);
           "email": "sample@email.com"
         },
         "status": "Pending",
-        "createdAt": "2026-09-25T14:32:43.000000Z"
+        "createdAt": "2026-09-25T14:32:43.000000Z",
+        "updatedAt": "2026-09-25T14:32:43.000000Z",
       }
     }
   ],
@@ -290,5 +300,7 @@ Parameter | Required | Type | Description
 page | no | integer | The page of results to return. Defaults to 1. Use `meta.lastPage` or `links.next` to page through results.
 perPage | no | integer | The number of results per page. Defaults to 250. Maximum 250.
 dateStart | no | string | Return appointments scheduled on or after this date (`YYYY-MM-DD`, e.g. `2026-01-01`). Dates are in UTC.
-dateEnd | no | string | Return appointments scheduled on or before this date (`YYYY-MM-DD`, e.g. `2026-12-31`). Dates are in UTC.
+dateEnd | no | string | Return appointments scheduled on or before this date (`YYYY-MM-DD`, e.g. `2026-12-31`). Must not be earlier than dateStart. Dates are in UTC.
+updatedStart | no | string | Return appointments last updated at or after this time. An ISO 8601 timestamp with a timezone (e.g. `2026-01-01T00:00:00Z` or `2026-01-01T07:00:00-05:00`).
+updatedEnd | no | string | Return appointments last updated at or before this time. Same format as `updatedStart`, and must not be earlier than it.
 phone | no | string | Filter appointments by a phone number in E.164 format (e.g. `+14125551212`).
