@@ -163,17 +163,54 @@ $response = curl_exec($ch);
         "lastName": "Assignee",
         "email": "sample@email.com"
       },
+      "source": "Website",
+      "sourceUrl": null,
+      "referrer": null,
       "status": "Pending",
+      "mediaType": null,
+      "type": null,
+      "utm": {
+        "utmCampaign": null,
+        "utmContent": null,
+        "utmKeyword": null,
+        "utmMedium": "paid",
+        "utmSource": "facebook",
+        "utmTerm": null,
+        "gclid": null
+      },
       "createdAt": "2026-09-25T14:32:43.000000Z",
       "updatedAt": "2026-09-25T14:32:43.000000Z",
       "appointments": [
         {
           "uuid": "stuvwxyz-4b83-4a7b-9292-1f7ca3e0f4a4",
           "datetime": "2026-09-28T18:00:00.000000Z",
+          "datetimeWindowEnd": null,
           "duration": 90,
           "status": "Pending",
+          "type": "Household",
+          "disposition": "open",
           "createdAt": "2026-09-26T15:05:30.000000Z",
-          "updatedAt": "2026-09-26T15:05:30.000000Z"
+          "updatedAt": "2026-09-26T15:05:30.000000Z",
+          "unitSets": [
+            {
+              "transactionType": "sale",
+              "totalPrice": 0,
+              "paymentMethod": "Cash",
+              "rentalTerm": null,
+              "installDate": "2026-10-21",
+              "installCharge": 150,
+              "units": [
+                {
+                  "unitCategory": "Drinking Water",
+                  "unitType": "Drinking Water",
+                  "unitTypeOther": null,
+                  "price": 20,
+                  "quantity": 1,
+                  "taxEligible": true
+                }
+              ]
+            }
+          ]
         }
       ]
     }
@@ -264,10 +301,44 @@ $response = curl_exec($ch);
           "lastName": "Assignee",
           "email": "sample@email.com"
         },
+        "source": "Website",
+        "sourceUrl": null,
+        "referrer": null,
         "status": "Pending",
+        "mediaType": null,
+        "type": null,
+        "utm": {
+          "utmCampaign": null,
+          "utmContent": null,
+          "utmKeyword": null,
+          "utmMedium": "paid",
+          "utmSource": "facebook",
+          "utmTerm": null,
+          "gclid": null
+        },
         "createdAt": "2026-09-25T14:32:43.000000Z",
         "updatedAt": "2026-09-25T14:32:43.000000Z",
-      }
+      },
+      "unitSets": [
+        {
+          "transactionType": "sale",
+          "totalPrice": 0,
+          "paymentMethod": "Cash",
+          "rentalTerm": null,
+          "installDate": "2026-10-21",
+          "installCharge": 150,
+          "units": [
+            {
+              "unitCategory": "Drinking Water",
+              "unitType": "Drinking Water",
+              "unitTypeOther": null,
+              "price": 20,
+              "quantity": 1,
+              "taxEligible": true
+            }
+          ]
+        }
+      ]
     }
   ],
   "meta": {
